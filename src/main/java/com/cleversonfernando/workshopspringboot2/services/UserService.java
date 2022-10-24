@@ -1,6 +1,7 @@
 package com.cleversonfernando.workshopspringboot2.services;
 
 
+import com.cleversonfernando.workshopspringboot2.DTO.UserDTO;
 import com.cleversonfernando.workshopspringboot2.domain.User;
 import com.cleversonfernando.workshopspringboot2.repository.UserRepository;
 import com.cleversonfernando.workshopspringboot2.services.exception.ObjectNotFoundException;
@@ -23,5 +24,12 @@ import java.util.Optional;
     public User findById(String id){
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!"));
+    }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+        public User fromDTO(UserDTO objDto){
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
