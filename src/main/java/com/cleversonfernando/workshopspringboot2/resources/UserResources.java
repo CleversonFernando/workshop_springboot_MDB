@@ -1,6 +1,7 @@
 package com.cleversonfernando.workshopspringboot2.resources;
 
 import com.cleversonfernando.workshopspringboot2.DTO.UserDTO;
+import com.cleversonfernando.workshopspringboot2.domain.Post;
 import com.cleversonfernando.workshopspringboot2.domain.User;
 import com.cleversonfernando.workshopspringboot2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +55,10 @@ public class UserResources {
         obj = service.update(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.noContent().build();
-}}
+}
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPost(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
+}
