@@ -1,5 +1,6 @@
 package com.cleversonfernando.workshopspringboot2.config;
 
+import com.cleversonfernando.workshopspringboot2.DTO.AuthorDTO;
 import com.cleversonfernando.workshopspringboot2.domain.Post;
 import com.cleversonfernando.workshopspringboot2.domain.User;
 import com.cleversonfernando.workshopspringboot2.repository.PostRepository;
@@ -33,9 +34,11 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), maria, "partiu viagem", "Vou viajar para são paulo");
-        Post post2 = new Post(null,sdf.parse("23/03/2018"), maria, "Bom dia", "Acordei felix hoje");
-        postRepository.saveAll(Arrays.asList(post1, post2));
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), new AuthorDTO(maria), "partiu viagem", "Vou viajar para são paulo");
+        Post post2 = new Post(null,sdf.parse("23/03/2018"), new AuthorDTO(maria), "Bom dia", "Acordei felix hoje");
+        postRepository.saveAll(Arrays.asList(post1, post2));
         }
     }
