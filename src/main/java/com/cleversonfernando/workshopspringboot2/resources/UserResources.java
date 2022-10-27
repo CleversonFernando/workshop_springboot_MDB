@@ -3,6 +3,7 @@ package com.cleversonfernando.workshopspringboot2.resources;
 import com.cleversonfernando.workshopspringboot2.DTO.UserDTO;
 import com.cleversonfernando.workshopspringboot2.domain.Post;
 import com.cleversonfernando.workshopspringboot2.domain.User;
+import com.cleversonfernando.workshopspringboot2.resources.util.URL;
 import com.cleversonfernando.workshopspringboot2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
