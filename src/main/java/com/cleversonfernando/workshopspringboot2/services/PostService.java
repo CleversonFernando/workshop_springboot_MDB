@@ -12,24 +12,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-    public class PostService {
+public class PostService {
 
     @Autowired
-    private PostRepository repo;
+    private PostRepository repository;
 
-    public List<Post> findAll(){
-        return repo.findAll();
+    public List<Post> findAll() {
+        return repository.findAll();
     }
 
-    public Post findById(String id){
-        Optional<Post> obj = repo.findById(id);
+    public Post findById(String id) {
+        Optional<Post> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!"));
     }
-    public List<Post> findByTitle(String text){
-        return repo.searchTitle(text);
+
+    public List<Post> findByTitle(String text) {
+        return repository.searchTitle(text);
     }
-    public List<Post> fullSearch(String text, Date minDate, Date maxDate){
+
+    public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
         maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
-        return repo.fullSearch(text, minDate, maxDate);
+        return repository.fullSearch(text, minDate, maxDate);
     }
 }

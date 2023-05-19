@@ -12,21 +12,21 @@ import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.TimeZone;
+
+import static java.util.TimeZone.getTimeZone;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PostRepository postRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        sdf.setTimeZone(getTimeZone("GMT"));
 
         userRepository.deleteAll();
         postRepository.deleteAll();
@@ -39,7 +39,7 @@ public class Instantiation implements CommandLineRunner {
 
 
         Post post1 = new Post(null, sdf.parse("21/03/2018"), new AuthorDTO(maria), "partiu viagem", "Vou viajar para são paulo");
-        Post post2 = new Post(null,sdf.parse("23/03/2018"), new AuthorDTO(maria), "Bom dia", "Acordei feliz hoje");
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), new AuthorDTO(maria), "Bom dia", "Acordei feliz hoje");
 
         CommentDTO c1 = new CommentDTO("Boa viagem!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
         CommentDTO c2 = new CommentDTO("Aproveite", sdf.parse("22/03/2018"), new AuthorDTO(bob));
@@ -52,5 +52,5 @@ public class Instantiation implements CommandLineRunner {
 
         maria.getPosts().addAll(Arrays.asList(post1, post2));
         userRepository.save(maria);
-        }
     }
+}
